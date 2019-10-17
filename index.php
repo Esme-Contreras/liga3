@@ -62,6 +62,17 @@
   $campos = array('cual'=>$select, '*', '-fecha');
   HTML::forma($liga, 'Modificar '.$tabla, $campos, $props, true);
  $cont = ob_get_clean();
+
+//Imprime una lista de instancias almacenadas
+$props = array('ol' => array('style'=>'font-weight:bold'),
+               'li' => 'title="Mide @{strlen("@[1]")}@ caracteres"',
+               'li@si(strlen("@[nombre]")>7)'  => 'style="color:red"',
+               'li@si("@[nombre]"=="Galileo")' => 'style="color:blue"');
+HTML::lista(LIGA('usuarios'), '1', true, $props);
+
+//Checkbox para usuarios
+echo HTML::checkbox(LIGA('usuarios'), 'usuarios[]');
+
  
   // Estuctura el cuerpo de la página
   HTML::cuerpo(array('cont'=>$cont));
